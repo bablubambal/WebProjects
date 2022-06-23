@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Site</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,600;0,700;0,800;1,100;1,200;1,300;1,800&family=Roboto:ital,wght@0,300;0,400;1,400;1,900&display=swap" rel="stylesheet">
+    <style>
+*{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+h3{
+    font-family: cursive;
+}
+.nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* margin: 0px 20px; */
+    background-color: antiquewhite;
+    padding: 15px;
+
+}
+.nav h3{
+    margin-left: 15px;
+}
+ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0px 15px;
+}
+.hero{
+    height: 100vh;
+    width: 100%;
+
+    background-image: url(https://images.unsplash.com/photo-1620570623737-efc0ec4ab486?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80);
+    background-size: cover;
+    background-position: center;
+    
+}
+
+.hero h1 {
+    color: #fff;
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
+    position: absolute;
+    top: 50%;
+    left: 42%;
+
+}
+button{
+    color: #fff;
+    background: transparent;
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    padding: 10px 30px;
+    border: 1px solid black;
+    border-radius: 10px;
+    transition: 1s;
+}
+button:hover{
+    color:black;
+    background: white;
+   
+    
+}
+
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <h3>FOOD</h3>
+        <ul>
+            <li>Home</li>
+            <li>About Us</li>
+            <li>Menu</li>
+            <li>Services</li>
+        </ul>
+    </div>
+    <div class="hero">
+        <h1>World's Best Computers</h1>
+        <button class="h1">Login</button>
+    </div>
+    <div class="content">
+        <div></div>
+    </div>
+    
+</body>
+</html>

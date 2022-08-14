@@ -1,0 +1,9 @@
+.logo-img{
+    width: 250px !important;
+}
+
+@media (max-width:500px){
+    .logo-img{
+        width: 150px !important;
+    }
+}

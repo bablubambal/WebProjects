@@ -466,6 +466,9 @@ var id1=	$("#id").val();
 // var id1=	$("#id").val();
 // 	var name= $("#name").val();
 console.log("the value:",id1)
+	  if(id1 == undefined || id1 == null){
+  id1 = ""
+}
 	
 	
     var url = script_url+"?callback=ctrlq&name="+name+"&id="+id1+"&action=delete";

@@ -1,0 +1,104 @@
+#Works{
+    padding: 50px 18px;
+    width: 100%;
+    min-height: 70vh;
+    background-color: black;
+    color: #fff;
+    /* display: none; */
+}
+
+#Works .works-item-title-section{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#Works .works-item-title-section h5{
+    font-weight: lighter;
+    font-size: 15px;
+}
+
+.works-item-card-group-section{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+    align-items: inherit;
+    justify-content: center;
+    margin-top: 30px;
+    column-gap: 15px;
+    row-gap: 20px;
+}
+
+.works-item-card-group-section .work-item-card-group{
+    width: 300px;
+    min-height: 300px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    border: 1px solid violet;
+    border-radius: 8px;
+    transition: all 0.5s;
+}
+
+.works-item-card-group-section .work-item-card-group:hover{
+    transform: scale(1.02);
+    border-color: burlywood;
+    background-color: rgb(57, 56, 56);
+    transition: all 0.5s;
+}
+
+.work-item-card-image,
+.work-item-card-image img{
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    transition: all 0.5s;
+}
+
+.work-item-card-image{
+    background-color: aqua;
+}
+
+.work-item-card-image img{
+    transform: rotate(10deg);
+}
+.work-item-card-image:hover img{
+    transform: rotate(0deg);
+    transition: all 0.5s;
+}
+
+.work-item-card-title{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.work-item-card-btn{
+    display: flex;
+    width: 100%;
+}
+.work-item-card-btn .view-demo-btn,
+.work-item-card-btn a{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(79, 191, 236);
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+
+.work-item-card-btn .view-demo-btn:hover{
+    background-color: rgb(12, 178, 244);
+    transition: all 0.5s;
+}
+
+.work-item-card-btn a{
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    
+    color: #fff;
+}

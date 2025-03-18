@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint Tracker</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #ddd;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.nav-btn.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+.dashboard {
+    text-align: center;
+}
+
+.carbon-gauge {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.progress-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: conic-gradient(#4CAF50 0% 70%, #ddd 70% 100%);
+    margin: 20px auto;
+    position: relative;
+}
+
+.progress {
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.stat-card {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.cta-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-group {
+    margin: 15px 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.submit-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.recommendations-list {
+    margin-top: 15px;
+}
+
+.recommendation-card {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.progress-graph {
+    margin: 20px 0;
+}
+
+.milestones {
+    margin-top: 20px;
+}
+
+.milestones ul {
+    list-style: none;
+    padding: 0;
+}
+
+.milestones li {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.goal-input {
+    margin-top: 10px;
+}
+
+.goal-input input {
+    padding: 8px;
+    margin-right: 10px;
+}
+
+.goal-input button {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Your Carbon Footprint <span>🌱</span></h1>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-bar">
+            <button class="nav-btn active" onclick="showSection('home')">Home</button>
+            <button class="nav-btn" onclick="showSection('calculate')">Calculate</button>
+            <button class="nav-btn" onclick="showSection('recommendations')">Recommendations</button>
+            <button class="nav-btn" onclick="showSection('progress')">Progress</button>
+        </nav>
+
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="dashboard">
+                <div class="carbon-gauge">
+                    <h2>Current Footprint: <span id="carbon-value">3.5</span> tons CO₂/year</h2>
+                    <p>Target: 2 tons/year</p>
+                    <div class="progress-circle">
+                        <div class="progress" id="progress-circle"></div>
+                    </div>
+                    <p class="motivation">You're <span id="gap-value">1.5</span> tons above your target—let's reduce it!</p>
+                </div>
+                <div class="stats">
+                    <div class="stat-card">Transportation: <span id="transport-stat">1.2</span> tons</div>
+                    <div class="stat-card">Energy Use: <span id="energy-stat">1.8</span> tons</div>
+                    <div class="stat-card">Diet: <span id="diet-stat">0.5</span> tons</div>
+                </div>
+                <button class="cta-btn" onclick="showSection('calculate')">Calculate Your Footprint</button>
+            </div>
+        </section>
+
+        <!-- Calculate Section -->
+        <section id="calculate" class="section">
+            <h2>Calculate Your Footprint</h2>
+            <form id="carbon-form">
+                <div class="form-group">
+                    <label for="transport">Transportation (miles/day):</label>
+                    <input type="number" id="transport" min="0" placeholder="e.g., 10">
+                </div>
+                <div class="form-group">
+                    <label for="energy">Energy Use (kWh/month):</label>
+                    <input type="number" id="energy" min="0" placeholder="e.g., 500">
+                </div>
+                <div class="form-group">
+                    <label for="diet">Diet:</label>
+                    <select id="diet">
+                        <option value="meat">Meat-heavy</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Calculate</button>
+            </form>
+            <div id="result" class="result"></div>
+        </section>
+
+        <!-- Recommendations Section -->
+        <section id="recommendations" class="section">
+            <h2>Recommendations</h2>
+            <select id="filter" onchange="filterRecommendations()">
+                <option value="all">All</option>
+                <option value="transport">Transportation</option>
+                <option value="energy">Energy</option>
+                <option value="diet">Diet</option>
+            </select>
+            <div id="recommendations-list" class="recommendations-list"></div>
+        </section>
+
+        <!-- Progress Section -->
+        <section id="progress" class="section">
+            <h2>Progress Tracker</h2>
+            <div class="progress-graph">
+                <canvas id="progress-chart"></canvas>
+            </div>
+            <div class="milestones">
+                <h3>Milestones</h3>
+                <ul id="milestone-list"></ul>
+            </div>
+            <button class="cta-btn" onclick="setGoal()">Set New Goal</button>
+            <div id="goal-input" class="goal-input" style="display: none;">
+                <input type="number" id="new-goal" placeholder="e.g., 2 tons">
+                <button onclick="saveGoal()">Save</button>
+            </div>
+            <p id="goal-status"></p>
+        </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Navigation logic
+function showSection(sectionId) {
+    const sections = document.getElementsByClassName('section');
+    const buttons = document.getElementsByClassName('nav-btn');
+    for (let section of sections) section.classList.remove('active');
+    for (let button of buttons) button.classList.remove('active');
+    document.getElementById(sectionId).classList.add('active');
+    document.querySelector(`.nav-btn[onclick="showSection('${sectionId}')"]`).classList.add('active');
+}
+
+// Initial load
+document.addEventListener('DOMContentLoaded', () => {
+    showSection('home');
+    updateRecommendations();
+    initializeProgressChart();
+});
+
+// Form submission logic
+document.getElementById('carbon-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const transport = parseFloat(document.getElementById('transport').value) || 0;
+    const energy = parseFloat(document.getElementById('energy').value) || 0;
+    const diet = document.getElementById('diet').value;
+
+    // Simplified carbon calculation (example factors in tons CO₂/year)
+    const transportEmission = (transport * 0.4 * 365) / 1000; // 0.4 kg CO₂ per mile, annualized
+    const energyEmission = (energy * 0.0023 * 12) / 1000; // 2.3 kg CO₂ per kWh, annualized
+    const dietEmission = diet === 'meat' ? 1.0 : diet === 'vegetarian' ? 0.7 : 0.5;
+
+    const totalFootprint = transportEmission + energyEmission + dietEmission;
+    const target = 2.0; // Target footprint
+    const gap = totalFootprint - target;
+
+    document.getElementById('carbon-value').textContent = totalFootprint.toFixed(1);
+    document.getElementById('gap-value').textContent = gap.toFixed(1);
+    document.getElementById('transport-stat').textContent = transportEmission.toFixed(1);
+    document.getElementById('energy-stat').textContent = energyEmission.toFixed(1);
+    document.getElementById('diet-stat').textContent = dietEmission.toFixed(1);
+    document.getElementById('result').textContent = `Your estimated carbon footprint is ${totalFootprint.toFixed(1)} tons CO₂/year.`;
+
+    updateRecommendations(totalFootprint, transportEmission, energyEmission, dietEmission);
+    updateProgressChart(totalFootprint);
+    showSection('home');
+});
+
+// Recommendations logic
+function updateRecommendations(totalFootprint, transport = 1.2, energy = 1.8, diet = 0.5) {
+    const recommendationsList = document.getElementById('recommendations-list');
+    recommendationsList.innerHTML = '';
+
+    const recommendations = [
+        { text: "Switch to public transport", category: "transport", impact: 0.5, condition: transport > 1.0 },
+        { text: "Use energy-efficient appliances", category: "energy", impact: 0.3, condition: energy > 1.0 },
+        { text: "Adopt a vegetarian diet", category: "diet", impact: 0.3, condition: diet > 0.7 },
+        { text: "Reduce car usage by 50%", category: "transport", impact: 0.6, condition: transport > 1.5 },
+    ];
+
+    recommendations.forEach(rec => {
+        if (rec.condition) {
+            const card = document.createElement('div');
+            card.className = 'recommendation-card';
+            card.innerHTML = `
+                <p>${rec.text}</p>
+                <p>Potential Savings: ${rec.impact} tons CO₂/year</p>
+                <button onclick="markCompleted('${rec.text}')">Completed</button>
+            `;
+            recommendationsList.appendChild(card);
+        }
+    });
+}
+
+function filterRecommendations() {
+    const filter = document.getElementById('filter').value;
+    const cards = document.getElementsByClassName('recommendation-card');
+    for (let card of cards) {
+        const category = card.querySelector('p').textContent.split(' ')[0].toLowerCase();
+        card.style.display = (filter === 'all' || filter === category) ? 'block' : 'none';
+    }
+}
+
+function markCompleted(text) {
+    alert(`${text} marked as completed!`);
+    // Add logic to track completion (e.g., update progress)
+}
+
+// Progress logic
+let progressData = [3.8, 3.5, 3.2]; // Sample data (tons CO₂/year)
+let chart;
+
+function initializeProgressChart() {
+    const ctx = document.getElementById('progress-chart').getContext('2d');
+    chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar'],
+            datasets: [{
+                label: 'Carbon Footprint (tons)',
+                data: progressData,
+                borderColor: '#4CAF50',
+                fill: false
+            }]
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+}
+
+function updateProgressChart(newValue) {
+    progressData.push(newValue);
+    if (progressData.length > 6) progressData.shift(); // Keep last 6 months
+    chart.data.labels.push(new Date().toLocaleString('default', { month: 'short' }));
+    if (chart.data.labels.length > 6) chart.data.labels.shift();
+    chart.data.datasets[0].data = progressData;
+    chart.update();
+
+    const milestoneList = document.getElementById('milestone-list');
+    milestoneList.innerHTML += `<li>Mar 18, 2025: Reduced to ${newValue.toFixed(1)} tons</li>`;
+}
+
+let goal = 2.0;
+
+function setGoal() {
+    document.getElementById('goal-input').style.display = 'block';
+}
+
+function saveGoal() {
+    goal = parseFloat(document.getElementById('new-goal').value) || 2.0;
+    document.getElementById('goal-input').style.display = 'none';
+    document.getElementById('goal-status').textContent = `New Goal Set: ${goal} tons by Dec 2025`;
+}
+    </script>
+</body>
+</html>
